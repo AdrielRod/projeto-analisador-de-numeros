@@ -1,6 +1,7 @@
 tudoOK = false
 clicado = false
 let valores = []
+botao = document.getElementById('bot')
 
 function adicionar()
 {
@@ -9,9 +10,16 @@ function adicionar()
     var n = Number(numeroAdd.value)
     if(clicado)
     {
-        caixa.innerText = ""
-        res.innerHTML = ""
+        caixa.innerText = null
+        res.innerHTML = null
+        if(valores.length > 0)
+        {
+            valores = []
+        }
+        clicado = false
+        
     }
+
     if(Number(document.getElementById('inumero').value.length) == 0)
     {
         alert("Adicione um número!!")
@@ -34,11 +42,15 @@ function adicionar()
     }
 }
 function verificar()
-{   
+{       
+    if(clicado)
+    {
+        res.innerHTML = ""
+    }
     clicado = true
     res = document.getElementById('res')
     if(tudoOK)
-    {       
+    {           
         res.innerText += `Você inseriu ${valores.length} valores`
 
         var maiorelemento = 0
@@ -64,6 +76,12 @@ function verificar()
         res.innerHTML += `<br> Menor Valor: ${menorelemento}`
         res.innerHTML += `<br> Soma dos Valores: ${soma}`
         res.innerHTML += `<br> Media da Soma: ${media}`
+
+        for (let contador = 0; contador < valores.length; contador++)
+        {
+            valores[contador].shift()
+        }
+
     }
     else{
         alert("Você não adicionou nenhum número")
